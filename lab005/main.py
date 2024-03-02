@@ -14,4 +14,3 @@ turtle.forward(120)
 turtle.right(90)
 turtle.pendown()
 turtle.circle(80)
-123
