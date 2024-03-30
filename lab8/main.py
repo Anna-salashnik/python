@@ -1,44 +1,44 @@
 import random
 
+def get_user_choice():
+    while True:
+        answer = input("Что выберешь?\n").lower()
+        options = {"к": "камень", "н": "ножницы", "б": "бумага", "я": "ящерица", "с": "спок"}
+        for key, value in options.items():
+            if value.startswith(answer):
+                return key
+        print("Выберите среди 'камень', 'ножницы', 'бумага', 'ящерица' или 'спок'.")
+
+def determine_winner(player, bot):
+    rules = {
+        "к": ["н", "я", "б", "с"],
+        "н": ["б", "я", "с", "к"],
+        "б": ["к", "с", "н", "я"],
+        "я": ["б", "к", "н", "с"],
+        "с": ["н", "б", "я", "к"]
+    }
+    if player == bot:
+        return "Ничья!"
+    elif bot in rules[player]:
+        return "Ты победил!"
+    else:
+        return "Я победил!"
+
 print("Добро пожаловать в игру 'Камень, Ножницы, Бумага, Ящерица, Спок'!")
 playerScore = 0
 botScore = 0
 
-rules = {
-    "к": ["н", "я", "б", "С"],
-    "н": ["б", "я", "С", "к"],
-    "б": ["к", "С", "н", "я"],
-    "я": ["б", "к", "н", "С"],
-    "С": ["н", "б", "я", "к"]
-}
-
 for i in range(3):
-    answer = input("Что выберешь?\n").lower()
-  
-    if answer in {"камень", "камень", "к"}:
-        answer = "к"
-    elif answer in {"ножницы", "ножницы", "н"}:
-        answer = "н"
-    elif answer in {"бумагу", "бумага", "б"}:
-        answer = "б"
-    elif answer in {"ящерица", "ящерицу", "я"}:
-        answer = "я"
-    elif answer in {"с", "спок"}:
-        answer = "С"
-    else:
-        print("Такого варианта нет, выберите среди 'камень', 'ножницы', 'бумага', 'ящерица' или 'Спок'")
-        continue
-  
+    answer = get_user_choice()
     botAnswer = random.choice(list(rules.keys()))
     print(f"А я выберу {botAnswer}")
 
-    if answer == botAnswer:
-        print("Ничья!")
-    elif botAnswer in rules[answer]:
-        print("Ты победил!")
+    result = determine_winner(answer, botAnswer)
+    print(result)
+
+    if "победил" in result:
         playerScore += 1
-    else:
-        print("Я победил!")
+    elif "победил" in result:
         botScore += 1
 
 if playerScore == botScore:
