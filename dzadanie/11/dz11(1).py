@@ -1,5 +1,5 @@
 from turtle import *
-
+shape("turtle")
 # Запрашиваем у пользователя длину стороны квадрата
 side_length = int(input("Введите длину стороны квадрата: "))
 
